@@ -2,7 +2,7 @@
 
 class Database{
     private static $dbName = 'notificacao';
-    private static $dbHost = 'localhost';
+    private static $dbHost = '127.0.0.1';
     private static $dbUsername = 'root';
     private static $dbUserPassword = '';
 
