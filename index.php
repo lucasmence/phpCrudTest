@@ -34,7 +34,8 @@
                             echo '<td>'. $row['nome'] . '</td>';
                             echo '<td>'. $row['email'] . '</td>';
                             echo '<td>'. $row['senha']. '</td>';
-                            echo '</tr>';
+                            echo '<td><a class= "btn" href="read.php?id='.$row['id'].'">Read</a></td>';
+                            echo '</tr>';           
                         }
                         Database::disconnect();
                     ?>
