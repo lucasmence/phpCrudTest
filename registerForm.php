@@ -15,15 +15,23 @@
             <h3>Cadastro de Noticia</h3>
         </div>
         <form action="/postNews.php" method="POST">
-            Titulo<br>
-            <input type="text" name="edtTitulo" placeholder="Titulo" value=""/><br>
-            Data publicacao<br>
-            <input type="date" name="edtDataPublicacao" /><br>
-            Data Expiracao<br>
-            <input type="date" name="edtDataExpiracao" /><br>
+            Titulo
+            <br>
+            <input type="text" name="edtTitulo" placeholder="Titulo" value=""/>
+            <br>
+            Data publicacao
+            <br>
+            <input type="date" name="edtDataPublicacao" />
+            <br>
+            Data Expiracao
+            <br>
+            <input type="date" name="edtDataExpiracao" />
+            <br>
             <input type="checkbox" name="ckbNumeroSerie" value="usarNumeroSerie" />Filtrar por número de série<br>
-            <input type="text" name="edtNumeroSerie" /><br>
-            Sistemas<br>
+            <input type="text" name="edtNumeroSerie" />
+            <br>
+            Sistemas
+            <br>
             <div>
                 <input type="checkbox" name="ckbSistemaTodos" checked="True" value="todos" />Todos  &nbsp; 
                 <input type="checkbox" name="ckbSistemaContabilidade" value="contabilidade" />Contabilidade &nbsp;    

@@ -13,6 +13,9 @@
             <h3>PHP CRUD GRID</h3>
         </div>
         <div class="row">
+            <p>
+                <a  href="create.php" class="btn btn-success">Create</a>
+            </p>
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>

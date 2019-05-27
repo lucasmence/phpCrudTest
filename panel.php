@@ -12,8 +12,14 @@
         <div>
             <h1>FX NOTIFICACAO</h1>
             <h3>Painel</h3>
+            <div>
+                Bem-vindo <span>USUARIO</span> <br>
+                <a>Encerrar Sessão</a>
+            </div>
+            <br>
             <input type="button" value="Cadastrar" />
-            <input type="button" value="Atualizar" /> <br>
+            <input type="button" value="Atualizar" /> 
+            <br>
             
         </div>    
     </div>    
