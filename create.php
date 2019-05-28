@@ -6,7 +6,9 @@
         $id = $_REQUEST['id'];
     }
 
-    if (!empty($_POST)) {
+    $action = 'Create';
+
+     if (!empty($_POST)) {
         $nameError = null;
         $emailError = null;
         $passwordError = null;
@@ -37,14 +39,36 @@
         if ($valid) {
             $pdo = Database::connect();
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "INSERT INTO usuarios (nome, email, senha) values (?,?,md5(?)) ";
-            $q = $pdo->prepare($sql);
-            $q->execute(array($name,$email,$password));
+
+            if (empty($id)) {
+                $sql = "INSERT INTO usuarios (nome, email, senha) values (?,?,md5(?)) ";
+                $q = $pdo->prepare($sql);
+                $q->execute(array($name,$email,$password));
+            } else {
+                $sql = "UPDATE usuarios set nome = ?, email = ?, senha = md5(?) where id = ? ";
+                $q = $pdo->prepare($sql);
+                $q->execute(array($name,$email,$password,$id));
+            }    
+
             Database::disconnect();
+
             header("Location: index.php");
         }
+    } else if (!empty($id)){
+        $pdo = Database::connect();
 
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "SELECT nome, email, senha FROM usuarios where id = ? ";
+        $q = $pdo->prepare($sql);
+        $q->execute(array($id));
+        $data = $q->fetch(PDO::FETCH_ASSOC);
 
+        $name = $data['nome'];
+        $email = $data['email'];
+
+        $action = 'Update';
+
+        Database::disconnect(); 
     }
 ?>
 
@@ -52,7 +76,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Insert</title>
+    <title>Form - <?php echo $action;?> User</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link   href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.min.js"></script>
@@ -61,11 +85,11 @@
     <div class="container">
         <div class="spawn10 offset1">
             <div class="row">
-                <h3>Create a User</h3>
+                <h3><?php echo $action;?> an User</h3>
             </div>
         </div>
 
-        <form class="form-horizontal" action="create.php" method="post">
+        <form class="form-horizontal" action="create.php?id=<?php echo $id;?>" method="post">
             <div class="control-group <?php echo !empty($nameError)? 'error':'';?>">
                 <label class="control-label">Username</label>
                 <div class="controls">
@@ -94,7 +118,7 @@
                 </div>
             </div>
             <div class="form-actions">
-                <button type="submit" class="btn btn-success">Create</button>
+                <button type="submit" class="btn btn-success"><?php echo $action;?></button>
                 <a class="btn" href="index.php">Back</a>
             </div>
         </form>
