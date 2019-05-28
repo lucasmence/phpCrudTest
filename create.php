@@ -1,5 +1,6 @@
 <?php 
-    require 'database.php';
+    require "authentication.php";
+    $username = Validate::checkLogin();
 
     $id = null;
     if (!empty($_GET['id'])){

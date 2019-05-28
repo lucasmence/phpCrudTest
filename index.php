@@ -10,7 +10,7 @@
     if (!empty($_GET['error'])) {
         switch($_REQUEST['error']){
             case '1':
-                $messageError = "Wrong Username or Password, try again!";
+                $messageError = "Wrong username-password combination, try again!";
                 break;
             case '2':
                 $messageError = "Username / Password cannot be empty!";

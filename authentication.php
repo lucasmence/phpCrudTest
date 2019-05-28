@@ -44,4 +44,30 @@
             header("Location: index.php?username=".$username."&error=".$messageError);
         }
      }
+
+     class Validate{
+         public static function checkLogin(){
+            session_start();
+
+            $username = null;
+            $sql = null;
+        
+            if (!isset($_SESSION['user_id'])){
+                header("Location: index.php");
+            } else {
+                require 'database.php';
+                
+                $pdo = Database::connect();
+                $sql = "SELECT nome FROM usuarios WHERE id = ?";
+                $query = $pdo->prepare($sql);
+                $query->execute(array($_SESSION['user_id']));
+                $data = $query->fetch();
+                
+                $username = $data['nome'];
+                Database::disconnect();
+            }   
+
+            return $username;
+         }
+     }
 ?>

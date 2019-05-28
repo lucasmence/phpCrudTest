@@ -1,22 +1,6 @@
 <?php 
-    session_start();
-
-    $username = null;
-    $sql = null;
-
-    if (!isset($_SESSION['user_id'])){
-        header("Location: index.php");
-    } else {
-        include 'database.php';
-        $pdo = Database::connect();
-        $sql = "SELECT nome FROM usuarios WHERE id = ?";
-        $query = $pdo->prepare($sql);
-        $query->execute(array($_SESSION['user_id']));
-        $data = $query->fetch();
-        $username = $data['nome'];
-    }
-
-    
+    require "authentication.php";
+    $username = Validate::checkLogin();
 ?>
 
 <!DOCTYPE html>
@@ -46,6 +30,7 @@
                 </thead>
                 <tbody>
                     <?php   
+                        $pdo = Database::connect();
                         $sql = 'SELECT * FROM usuarios ORDER BY id DESC';
                         foreach ($pdo->query($sql) as $row){
                             echo '<tr>';
@@ -58,7 +43,8 @@
                             echo '  <a class="btn btn-danger" href="delete.php?id='.$row['id'].'">Delete</a>';
                             echo '</td>';
                             echo '</tr>';           
-                        }     
+                        }  
+                        Database::disconnect();   
                     ?>
 
                 </tbody>
