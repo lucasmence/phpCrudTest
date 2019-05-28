@@ -11,6 +11,10 @@
         switch($_REQUEST['error']){
             case '1':
                 $messageError = "Wrong Username or Password, try again!";
+                break;
+            case '2':
+                $messageError = "Username / Password cannot be empty!";
+                break;
         }
     }
     

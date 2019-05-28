@@ -1,3 +1,24 @@
+<?php 
+    session_start();
+
+    $username = null;
+    $sql = null;
+
+    if (!isset($_SESSION['user_id'])){
+        header("Location: index.php");
+    } else {
+        include 'database.php';
+        $pdo = Database::connect();
+        $sql = "SELECT nome FROM usuarios WHERE id = ?";
+        $query = $pdo->prepare($sql);
+        $query->execute(array($_SESSION['user_id']));
+        $data = $query->fetch();
+        $username = $data['nome'];
+    }
+
+    
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,9 +34,8 @@
             <h3>PHP CRUD GRID</h3>
         </div>
         <div class="row">
-            <p>
-                <a  href="create.php?id=0" class="btn btn-success">Create</a>
-            </p>
+            <p class="alert alert-info">Hello <?php  echo $username; ?>! &nbsp; <a class="btn btn-primary" href="authentication.php?logoff=1">Logoff</a> </p>
+            <p><a  href="create.php?id=0" class="btn btn-success">Create</a></p>
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -25,9 +45,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                        include 'database.php';
-                        $pdo = Database::connect();
+                    <?php   
                         $sql = 'SELECT * FROM usuarios ORDER BY id DESC';
                         foreach ($pdo->query($sql) as $row){
                             echo '<tr>';
@@ -40,8 +58,7 @@
                             echo '  <a class="btn btn-danger" href="delete.php?id='.$row['id'].'">Delete</a>';
                             echo '</td>';
                             echo '</tr>';           
-                        }
-                        Database::disconnect();
+                        }     
                     ?>
 
                 </tbody>
@@ -51,3 +68,7 @@
     </div>
 </body>
 </html>
+
+<?php 
+    Database::disconnect();
+?>
