@@ -31,7 +31,7 @@
                 <tbody>
                     <?php   
                         $pdo = Database::connect();
-                        $sql = 'SELECT * FROM usuarios ORDER BY id DESC';
+                        $sql = 'SELECT md5(id) id, nome, email, senha FROM usuarios ORDER BY id DESC';
                         foreach ($pdo->query($sql) as $row){
                             echo '<tr>';
                             echo '<td>'. $row['nome'] . '</td>';

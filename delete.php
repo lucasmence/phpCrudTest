@@ -1,7 +1,7 @@
 <?php
     require "authentication.php";
     $username = Validate::checkLogin();
-    
+
     $id = 0;
 
     if (!empty($_GET['id'])){
@@ -14,7 +14,7 @@
         $pdo = Database::connect();
 
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "DELETE FROM usuarios WHERE id = ?";
+        $sql = "DELETE FROM usuarios WHERE md5(id) = ?";
         $q = $pdo->prepare($sql);
         $q->execute(array($id));
 
