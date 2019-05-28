@@ -18,7 +18,7 @@
 
         Database::disconnect();
         
-        header("Location: index.php");
+        header("Location: mainPage.php");
     }
 ?>
 
@@ -42,7 +42,7 @@
                 <p class="alert alert-error" >Are you sure to delete?</p>
                 <div class="form-actions">
                     <button type="submit" class="btn btn-danger">Yes</button>
-                    <a class="btn" href="index.php">No</a>
+                    <a class="btn" href="mainPage.php">No</a>
                 </div>
             </form>
 

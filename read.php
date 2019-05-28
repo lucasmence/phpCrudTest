@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="form-actions">
-                    <a class="btn btn-success" href="index.php">Back</a>
+                    <a class="btn btn-success" href="mainPage.php">Back</a>
                 </div>
             </div>
         </div>
