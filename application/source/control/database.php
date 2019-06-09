@@ -1,10 +1,10 @@
 <?php
 
 class Database{
-    private static $dbName = 'database';
-    private static $dbHost = 'localhost';
-    private static $dbUsername = 'username';
-    private static $dbUserPassword = 'password';
+    private static $databaseName = 'databaseName';
+    private static $databaseHost = 'localhost';
+    private static $databaseUsername = 'username';
+    private static $databasePassword = 'password';
 
     private static $cont = null;
 
@@ -15,7 +15,7 @@ class Database{
     public static function connect(){
         if (null == self::$cont){
             try {
-                self::$cont = new PDO ("mysql:host=".self::$dbHost.";"."dbname=".self::$dbName, self::$dbUsername, self::$dbUserPassword);
+                self::$cont = new PDO ("mysql:host=".self::$databaseName.";"."dbname=".self::$databaseHost, self::$databaseUsername, self::$databasePassword);
             } catch (PDOException $e){
                 die($e->getMessage());
             }

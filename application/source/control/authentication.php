@@ -1,31 +1,34 @@
 <?php 
+    ob_start();
+
     $id = null;
     if (!empty($_GET['logoff'])){
         if ($_REQUEST['logoff'] == '1') {
             session_start();
             session_destroy();
-            header("Location: index.php");    
+            header("Location: ../index.php");    
         }
     }
      if (!empty($_POST)){
-         $username = $_POST['username'];
+         $email = $_POST['email'];
          $password = $_POST['password'];
 
          $messageError = null;
 
-         if ((empty($username)) || (empty($password))) {
+         if ((empty($email)) || (empty($password))) {
              $messageError = 2;
          }
 
          if ($messageError == null){
-            require 'Database.php';            
-             $pdo = Database::connect();
-             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            require 'database.php';      
 
-             $sql = "SELECT id FROM usuarios where nome = ? and senha = md5(?)";
+             $pdo = Database::connect();
+
+             $sql = "SELECT id FROM users where email = ? and password = md5(?)";
              $query = $pdo->prepare($sql);
-             $query->execute(array($username, $password));
-             $data = $query->fetch(PDO::FETCH_ASSOC);
+             $query->execute(array($email, $password));
+
+             $data = $query->fetch();
 
              Database::disconnect();
 
@@ -39,9 +42,9 @@
         if (empty($messageError)){
             session_start();
             $_SESSION['user_id'] = $id;
-            header("Location: mainPage.php");
+            header("Location: mainPanel.php");
         } else {
-            header("Location: index.php?username=".$username."&error=".$messageError);
+            header("Location: ../index.php?email=".$email."&error=".$messageError);
         }
      }
 
@@ -53,17 +56,17 @@
             $sql = null;
         
             if (!isset($_SESSION['user_id'])){
-                header("Location: index.php");
+                header("Location: ../index.php");
             } else {
                 require 'database.php';
                 
                 $pdo = Database::connect();
-                $sql = "SELECT nome FROM usuarios WHERE id = ?";
+                $sql = "SELECT username FROM users WHERE id = ?";
                 $query = $pdo->prepare($sql);
                 $query->execute(array($_SESSION['user_id']));
                 $data = $query->fetch();
                 
-                $username = $data['nome'];
+                $username = $data['username'];
                 Database::disconnect();
             }   
 
