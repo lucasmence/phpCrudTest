@@ -15,7 +15,7 @@ class Database{
     public static function connect(){
         if (null == self::$cont){
             try {
-                self::$cont = new PDO ("mysql:host=".self::$databaseName.";"."dbname=".self::$databaseHost, self::$databaseUsername, self::$databasePassword);
+                self::$cont = new PDO ("mysql:host=".self::$databaseHost.";"."dbname=".self::$databaseName, self::$databaseUsername, self::$databasePassword);
             } catch (PDOException $e){
                 die($e->getMessage());
             }

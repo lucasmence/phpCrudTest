@@ -1,0 +1,12 @@
+{
+    "index.php" : {
+        "title" : "Login",
+        "header" : "Login Form",
+        "email" : "Email",
+        "emailPlaceholder" : "someone@email.com",
+        "password" : "Password",
+        "buttonLogin" : "Login",
+        "errorLoginFailed" : "Sorry, but your password or email doesn't match, try again!",
+        "errorLoginEmpty" : "Too bad, your email address and password can't be blank!"
+    }
+}

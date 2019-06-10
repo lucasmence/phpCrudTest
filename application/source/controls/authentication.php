@@ -1,4 +1,6 @@
 <?php 
+    include_once 'system.php';
+
     ob_start();
 
     $id = null;
@@ -20,11 +22,10 @@
          }
 
          if ($messageError == null){
-            require 'database.php';      
 
-             $pdo = Database::connect();
+             $pdo = Database::connect();    
 
-             $sql = "SELECT id FROM users where email = ? and password = md5(?)";
+             $sql = "SELECT id FROM commercial_users where email = ? and password = md5(?)";
              $query = $pdo->prepare($sql);
              $query->execute(array($email, $password));
 
@@ -44,7 +45,8 @@
             $_SESSION['user_id'] = $id;
             header("Location: mainPanel.php");
         } else {
-            header("Location: ../index.php?email=".$email."&error=".$messageError);
+            
+            header("Location: ../../../index.php?email=".$email."&error=".$messageError);
         }
      }
 
@@ -58,8 +60,7 @@
             if (!isset($_SESSION['user_id'])){
                 header("Location: ../index.php");
             } else {
-                require 'database.php';
-                
+
                 $pdo = Database::connect();
                 $sql = "SELECT username FROM users WHERE id = ?";
                 $query = $pdo->prepare($sql);
