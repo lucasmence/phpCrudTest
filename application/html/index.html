@@ -16,19 +16,19 @@
             </div>
         </div>
         <form class="form-horizontal" action="application/source/controls/authentication.php" method="post">
-            <div  class="alert alert-danger" style="visibility: $VISIBILITY$; " role="alert">
-                $MESSAGE_ERROR$
+            <div  class="alert alert-danger" style="visibility: $VISIBILITY_ALERT$; " role="alert">
+                $ALERT_ERROR$
             </div>
            
             <div class="control-group">
-                <label class="control-label">$EMAIL$</label>
+                <label class="control-label">$EMAIL_LABEL$</label>
                 <div class="controls">
-                    <input name="email" type="text" placeholder="$EMAILPLACEHOLDER$"/>
+                    <input name="email" type="text" placeholder="$EMAILPLACEHOLDER$" value="$EMAIL$"/>
                 </div>
             </div>
 
             <div class="control-group">
-                <label class="control-label">$PASSWORD$</label>
+                <label class="control-label">$PASSWORD_LABEL$</label>
                 <div class="controls">
                     <input name="password" type="password" />      
                 </div>

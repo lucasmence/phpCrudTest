@@ -1,15 +1,8 @@
-<?php 
+<?php
 
-    include_once 'application/source/controls/system.php';
+    include_once 'application/source/controls/libraries.php';
 
-    $html = file_get_contents('application/html/index.html');
-
-    $language = new Language('en');
-    $pageData = $language->loadLanguage('index.php');
-
-    foreach ($pageData as $key => $value) {
-        $html = str_replace('$'.strtoupper($key).'$',$value,$html);
-    }
+    $html = new HtmlParser('index');
 
     $email = null;
     $messageError = null;
@@ -22,20 +15,19 @@
         
         switch($_REQUEST['error']){
             case '1':
-                $messageError = $pageData->errorLoginFailed;
+                $messageError = $html->text->errorLoginFailed;
                 break;
             case '2':
-                $messageError = $pageData->errorLoginEmpty;
+                $messageError = $html->text->errorLoginEmpty;
                 break;  
         }
-        $html = str_replace('$MESSAGE_ERROR$',$messageError,$html);
+        $html->setAlert('ERROR', $messageError);
     } 
-    if (!empty($messageError)){
-        $html = str_replace('$VISIBILITY$','none',$html);
-    } else {
-        $html = str_replace('$VISIBILITY$','hidden',$html);
-    }
 
-    echo $html;
-?>
+    $html->setVisibility('ALERT', $messageError);
+
+    $html->setValue('EMAIL', $email );
+
+    echo $html->print();
+
 
