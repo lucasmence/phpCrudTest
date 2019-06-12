@@ -1,7 +1,8 @@
 <?php 
-    include_once 'system.php';
 
     ob_start();
+
+    include_once "libraries.php"; 
 
     $id = null;
     if (!empty($_GET['logoff'])){
@@ -22,22 +23,22 @@
          }
 
          if ($messageError == null){
+            
+            $pdo = Database::connect();              
 
-             $pdo = Database::connect();    
+            $sql = "SELECT id FROM commercial_users where email = ? and password = md5(?)";
+            $query = $pdo->prepare($sql);
+            $query->execute(array($email, $password));
 
-             $sql = "SELECT id FROM commercial_users where email = ? and password = md5(?)";
-             $query = $pdo->prepare($sql);
-             $query->execute(array($email, $password));
+            $data = $query->fetch();
 
-             $data = $query->fetch();
+            Database::disconnect();
 
-             Database::disconnect();
-
-             if (empty($data['id'])){
-                $messageError = 1;
-             } else {
-                $id = $data['id'];           
-             }
+            if (empty($data['id'])){
+            $messageError = 1;
+            } else {
+            $id = $data['id'];           
+            }
          }
 
         if (empty($messageError)){

@@ -1,6 +1,6 @@
 <?php
 
-    include_once 'application/source/controls/libraries.php';
+    include_once 'application/source/controls/libraries.php';   
 
     $html = new HtmlParser('index');
 
@@ -26,7 +26,7 @@
 
     $html->setVisibility('ALERT', $messageError);
 
-    $html->setValue('EMAIL', $email );
+    $html->setValue('EMAIL', $email);
 
     echo $html->print();
 
