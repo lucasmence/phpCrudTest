@@ -11,3 +11,6 @@ Here's is the current To-Do list:
 - [ ] Create Account Form
 - [ ] Change Password Form
 - [ ] Forgot Password - Email system to recover account
+- [ ] Database
+- [ ] Post
+- [ ] MySQL Scheme
