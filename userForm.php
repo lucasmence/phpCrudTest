@@ -30,7 +30,7 @@
                 <input type="password" name="passwordConfirm" value=""><br><br>
         
                 <input type="submit" value="Post">
-                <a>Cancel</a>
+                <a href="index.php">Cancel</a>
             </form>
         </div>
     </div>
